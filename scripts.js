@@ -1,25 +1,31 @@
-let gridContainer = document.querySelector('#grid-container');
-gridContainer.style.width = window.innerHeight - 100 + 'px';
-gridContainer.style.height = window.innerHeight - 100 + 'px';
+let squareContainer = document.querySelector('#square-Container');
+squareContainer.style.width = window.innerHeight - 100 + 'px';
+squareContainer.style.height = window.innerHeight - 100 + 'px';
 
-function addEvent(arg) {
-    console.log('arg');
-    document.querySelector(arg).style.backgroundColor = '#00A36C';
-}
+
 
 
 function createGrid(size) {
-    let gridSize = size * size;
-    //let screeenSize = screen.width;
-    for (let i = 0; i < gridSize; i++) {
-        let gridItem = document.createElement('div');
-        gridItem.classList.add('grid-item');
-        gridItem.id = 'grid-item-' + (i + 1);
-        gridItem.style.flex = 100 / size + '%';
-        gridItem.setAttribute('onmouseover', 'addEvent(' + gridItem.id + ')');
-        gridContainer.appendChild(gridItem);
+    let squareSize = size * size;
+    for (let i = 0; i < squareSize; i++) {
+        let square = document.createElement('div');
+        square.id = 'square-' + (i + 1);
+        square.style.flex = 100 / size + '%';
+        squareContainer.appendChild(square);
     }
-    return size;
+    for (let i = 0; i < squareSize; i++) {
+        let selectedSquare = document.querySelector('#square-' + (i + 1));
+        selectedSquare.setAttribute('onmouseover', 'changeColor("square-' + (i + 1) + '")');        
+    }
+}
+
+
+
+
+function changeColor(arg) {
+    let ident = '#' + arg;
+    console.log(ident);
+    document.querySelector('' + ident + '').style.backgroundColor = '#00A36C';
 }
 
 createGrid(4);
